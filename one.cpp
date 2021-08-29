@@ -1,49 +1,57 @@
- void booleanMatrix(vector<vector<int> > &mat)
+void booleanMatrix(vector<vector<int> > &mat)
     {
-        int R=mat.size();
-        int C=mat[0].size();
+       int m=mat.size();
+        int n=mat[0].size();
         
-    bool row[R];
-    bool col[C];
- 
-    int i, j;
-     
-    /* Initialize all values of row[] as 0 */
-    for (i = 0; i < R; i++)
-    {
-    row[i] = 0;
-    }
- 
-    /* Initialize all values of col[] as 0 */
-    for (i = 0; i < C; i++)
-    {
-    col[i] = 0;
-    }
- 
-    // Store the rows and columns to be marked as
-    // 1 in row[] and col[] arrays respectively
-    for (i = 0; i < R; i++)
-    {
-        for (j = 0; j < C; j++)
+        bool row = false, col = false;
+        
+        for(int i=0;i<m;i++)
         {
-            if (mat[i][j] == 1)
+            for(int j=0;j<n;j++)
             {
-                row[i] = 1;
-                col[j] = 1;
+                if(mat[i][j]==1)
+                {
+                    if(i==0)
+                        row=true;
+                    
+                    if(j==0)
+                        col=true;
+                    
+                    mat[i][0]=1;
+                    mat[0][j]=1;
+                }
             }
         }
-    }
- 
-    // Modify the input matrix mat[] using the
-    // above constructed row[] and col[] arrays
-    for (i = 0; i < R; i++)
-    {
-        for (j = 0; j < C; j++)
+        
+        
+        for(int i=1;i<m;i++)
         {
-            if ( row[i] == 1 || col[j] == 1 )
+            for(int j=1;j<n;j++)
             {
-                mat[i][j] = 1;
+                if(mat[i][0]==1 or mat[0][j]==1)
+                {
+                    mat[i][j]=1;
+                }
             }
         }
+        
+        
+        
+        if(col)
+        {
+            for(int i=0;i<m;i++)
+            {
+                mat[i][0]=1;
+            }
+        }
+        
+        if(row)
+        {
+            for(int i=0;i<n;i++)
+            {
+                mat[0][i]=1;
+            }
+        }
+            
+        
     }
-}
